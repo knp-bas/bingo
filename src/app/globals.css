@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-kanit), ui-sans-serif, system-ui, sans-serif;
+
+  --color-night: #1a1033;
+  --color-night-2: #2a1a52;
+  --color-night-3: #3b2670;
+  --color-gold: #ffcc33;
+  --color-pink: #ff4fa3;
+  --color-mint: #3ee8b5;
+  --color-sky: #4fc3ff;
+
+  --animate-pop: pop 700ms cubic-bezier(0.2, 1.6, 0.4, 1) both;
+  --animate-shake: shake 400ms ease-in-out;
+  --animate-glow: glow 1.2s ease-in-out infinite;
+  --animate-wobble: wobble 120ms linear infinite;
+  --animate-rise: rise 500ms ease-out both;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.3) rotate(-12deg); opacity: 0; }
+  60% { transform: scale(1.25) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(255 204 51 / 0.7); transform: scale(1); }
+  50% { box-shadow: 0 0 0 14px rgb(255 204 51 / 0); transform: scale(1.04); }
+}
+@keyframes wobble {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-3%) rotate(-3deg); }
+  75% { transform: translateY(3%) rotate(3deg); }
+}
+@keyframes rise {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+html, body {
+  background: radial-gradient(ellipse at top, var(--color-night-3), var(--color-night) 70%) fixed;
+  color: #fff;
+  min-height: 100%;
+}
+
+/* The bingo ball: glossy sphere built from layered gradients. */
+.ball {
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0) 34%),
+    radial-gradient(circle at 50% 50%, var(--ball, var(--color-pink)) 0 62%, color-mix(in oklab, var(--ball, var(--color-pink)), black 35%) 100%);
+  box-shadow: 0 1.2em 2.5em -0.8em rgb(0 0 0 / 0.6), inset 0 -0.4em 0.8em rgb(0 0 0 / 0.25);
+}
+.ball-face {
+  border-radius: 9999px;
+  background: #fff;
+  color: var(--color-night);
+  box-shadow: inset 0 0.08em 0.2em rgb(0 0 0 / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
+}
